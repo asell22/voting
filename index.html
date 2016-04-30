@@ -10,6 +10,10 @@
     <ul>
       <li ng-repeat="poll in voting.polls">{{poll.title}} by {{poll.user}}</li>
     </ul>
+    <form ng-submit="voting.addPoll()">
+      <input type="text" ng-model="voting.name" placeholder="Name of Poll" required>
+      <input type="text" ng-model="voting.username" placeholder="Username" required>
+    </form>
     <button ng-click="voting.addPoll()">Add Poll</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
     <script src="app.js"></script>

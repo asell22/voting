@@ -12,9 +12,8 @@ angular.module('voting', [])
   ];
   this.count = this.polls.length;
   this.addPoll = function() {
-    this.count++;
     this.polls.push(
-      {title: `poll${this.count}`, user: `user${this.count}`}
+      {title: this.name, user: this.username}
     )
   }
 })
