@@ -2,7 +2,8 @@
   display: none !important;
 }
 
-input {
+input,
+.poll-form input.ng-valid.ng-touched {
   display: block;
   margin-bottom: 10px;
   padding: 5px 8px;
@@ -14,4 +15,29 @@ input:focus {
   outline: none;
   box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+input::placeholder {
+  color: #000;
+}
+
+.poll-form input.ng-invalid.ng-touched {
+  background: #FA787E;
+}
+
+input.ng-invalid.ng-touched::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: pink;
+  opacity: 1;
+}
+input.ng-invalid.ng-touched::-moz-placeholder { /* Firefox 19+ */
+  color: pink;
+  opacity: 1;
+}
+input.ng-invalid.ng-touched:-ms-input-placeholder { /* IE 10+ */
+  color: pink;
+  opacity: 1;
+}
+input.ng-invalid.ng-touched:-moz-placeholder { /* Firefox 18- */
+  color: pink;
+  opacity: 1
 }
