@@ -11,7 +11,10 @@ angular.module('voting', [])
     { title: 'poll6', user: 'user6' },
   ];
   this.count = this.polls.length;
-  this.addPoll = function() {
+  this.addPoll = function($event) {
+    if (!this.name || !this.username) {
+      $event.preventDefault();
+    }
     this.polls.push(
       {title: this.name, user: this.username}
     )
