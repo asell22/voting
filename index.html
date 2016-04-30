@@ -3,9 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Voting App</title>
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
   </head>
-  <body ng-app="voting" ng-controller="votingCtrl as voting">
-    <h1 ng-bind="voting.title"></h1>
+  <body ng-app="voting" ng-controller="votingCtrl as voting" ng-cloak>
+    <h1>{{voting.title}}</h1>
+    <ul>
+      <li ng-repeat="poll in voting.polls">{{poll.title}} by {{poll.user}}</li>
+    </ul>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
     <script src="app.js"></script>
   </body>
