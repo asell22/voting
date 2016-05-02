@@ -1,8 +1,8 @@
 angular.module('voting', [])
-.controller('votingCtrl', function() {
+.controller('votingCtrl', function($scope) {
   var self = this;
-  this.title = "Awesome Voting App";
-  this.polls = [
+  self.title = "Awesome Voting App";
+  self.polls = [
     { title: 'poll1', user: 'user1' },
     { title: 'poll2', user: 'user2' },
     { title: 'poll3', user: 'user3' },
@@ -10,13 +10,19 @@ angular.module('voting', [])
     { title: 'poll5', user: 'user5' },
     { title: 'poll6', user: 'user6' },
   ];
-  this.count = this.polls.length;
-  this.addPoll = function($event) {
-    if (!this.name || !this.username) {
+  self.count = this.polls.length;
+  self.addPoll = function($event) {
+    if (!self.name || !self.username) {
       $event.preventDefault();
     }
-    this.polls.push(
-      {title: this.name, user: this.username}
+
+
+    self.polls.push(
+      {title: self.name, user: self.username}
     )
+    $scope.pollForm.$setUntouched();
+    this.name = '';
+    this.username = '';
+
   }
 })
