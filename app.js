@@ -11,18 +11,19 @@ angular.module('voting', [])
     { title: 'poll6', user: 'user6' },
   ];
   self.count = this.polls.length;
-  self.addPoll = function($event) {
-    if (!self.name || !self.username) {
-      $event.preventDefault();
+  self.addPoll = function() {
+    angular.forEach($scope.pollForm.$error.required, function(field) {
+      field.$setTouched();
+    });
+
+    if ($scope.pollForm.$valid) {
+      self.polls.push(
+        {title: self.name, user: self.username}
+      )
+
+      $scope.pollForm.$setUntouched();
+      this.name = '';
+      this.username = '';
     }
-
-
-    self.polls.push(
-      {title: self.name, user: self.username}
-    )
-    $scope.pollForm.$setUntouched();
-    this.name = '';
-    this.username = '';
-
   }
 })
