@@ -41,3 +41,7 @@ input.ng-invalid.ng-touched:-moz-placeholder { /* Firefox 18- */
   color: pink;
   opacity: 1
 }
+
+button {
+  outline: none;
+}
