@@ -1,4 +1,22 @@
-angular.module('voting', [])
+angular.module('voting', ['ui.router'])
+.config([
+  '$stateProvider',
+  '$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'partials/polls.html',
+        controller: 'votingCtrl'
+      })
+      .state('form', {
+        url: '/new',
+        templateUrl: 'partials/form.html',
+        controller: 'votingCtrl'
+      })
+      $urlRouterProvider.otherwise('/');
+  }
+])
 .factory('polls', function() {
   var pollsObject = {
     polls : [

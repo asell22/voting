@@ -9,18 +9,12 @@
   <body ng-app="voting" ng-controller="votingCtrl as voting" ng-cloak>
     <div class="container">
       <h1>{{voting.title}}</h1>
-      <ul>
-        <li ng-repeat="poll in voting.polls">{{poll.title}} by {{poll.user}}</li>
-      </ul>
-      <form name="pollForm" ng-submit="voting.addPoll();" class="poll-form" novalidate>
-        <input type="text" ng-model="voting.name" placeholder="Name of Poll" required>
-        <input type="text" ng-model="voting.username" placeholder="Username" required>
-        <button type="submit" class="btn btn-primary">Add Poll</button>
-      </form>
+      <div ui-view></div>
     </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
