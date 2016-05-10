@@ -40,12 +40,16 @@ angular.module('voting', ['ui.router'])
   self.polls = polls
 
   self.count = self.polls.length;
+
+  // functions
+  self.addOption = function() {
+    console.log("Option added");
+  }
   self.addPoll = function() {
 
     angular.forEach($scope.pollForm.$error.required, function(field) {
       field.$setTouched();
     });
-    console.log(self.polls);
 
     if ($scope.pollForm.$valid) {
       polls.polls.push(
