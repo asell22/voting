@@ -1,6 +1,8 @@
-<form name="pollForm" ng-submit="voting.addPoll();" class="poll-form" novalidate>
-  <input type="text" ng-model="voting.name" placeholder="Name of Poll" required>
-  <input type="text" ng-model="voting.username" placeholder="Username" required>
-  <button type="submit" class="btn btn-primary">Add Poll</button>
-</form>
-<a ui-sref="home">Back</a>
+<div class="">
+  <form ng-submit="form.addPoll();" name="pollForm"  class="poll-form" novalidate>
+    <input type="text" ng-model="form.name" placeholder="Name of Poll" required>
+    <input type="text" ng-model="form.username" placeholder="Username" required>
+    <button type="submit" class="btn btn-primary">Add Poll</button>
+  </form>
+  <a ui-sref="home">Back</a>
+</div>

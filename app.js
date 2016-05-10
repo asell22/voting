@@ -7,12 +7,14 @@ angular.module('voting', ['ui.router'])
       .state('home', {
         url: '/',
         templateUrl: 'partials/polls.html',
-        controller: 'votingCtrl'
+        controller: 'mainCtrl',
+        controllerAs: 'main'
       })
       .state('form', {
         url: '/new',
         templateUrl: 'partials/form.html',
-        controller: 'votingCtrl'
+        controller: 'votingFormCtrl',
+        controllerAs: 'form'
       })
       $urlRouterProvider.otherwise('/');
   }
@@ -28,24 +30,32 @@ angular.module('voting', ['ui.router'])
 
   return pollsObject;
 })
-.controller('votingCtrl', function($scope, polls) {
+.controller('mainCtrl', function($scope, polls) {
   var self = this;
   self.title = "Awesome Voting App";
   self.polls = polls.polls;
-  self.count = this.polls.length;
+})
+.controller('votingFormCtrl', function($scope, polls, $state) {
+  var self = this;
+  self.polls = polls
+
+  self.count = self.polls.length;
   self.addPoll = function() {
+
     angular.forEach($scope.pollForm.$error.required, function(field) {
       field.$setTouched();
     });
+    console.log(self.polls);
 
     if ($scope.pollForm.$valid) {
-      self.polls.push(
+      polls.polls.push(
         {title: self.name, user: self.username}
       )
 
       $scope.pollForm.$setUntouched();
       this.name = '';
       this.username = '';
+      $state.go('home');
     }
   }
 })
