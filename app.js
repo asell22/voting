@@ -6,7 +6,7 @@ angular.module('voting', ['ui.router'])
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'partials/polls.html',
+        templateUrl: 'partials/main.html',
         controller: 'mainCtrl',
         controllerAs: 'main'
       })
@@ -15,6 +15,11 @@ angular.module('voting', ['ui.router'])
         templateUrl: 'partials/form.html',
         controller: 'votingFormCtrl',
         controllerAs: 'form'
+      })
+      .state('poll', {
+        url: '/polls/{id}',
+        templateUrl: 'partials/poll.html',
+        controller: 'pollCtrl'
       })
       $urlRouterProvider.otherwise('/');
   }
@@ -46,7 +51,8 @@ angular.module('voting', ['ui.router'])
   self.addOption = function() {
     self.optionObj = {
       name: self.option,
-      count: self.optionCount
+      count: self.optionCount,
+      totalVotes: 0
     }
     self.options.push(self.optionObj);
     self.option = '';
@@ -72,4 +78,8 @@ angular.module('voting', ['ui.router'])
       angular.element(document).find("h5").addClass('highlight');
     }
   }
+})
+.controller('pollCtrl', function($scope, polls, $stateParams) {
+  $scope.poll = polls.polls[$stateParams.id]
+  console.log($scope.poll);
 })

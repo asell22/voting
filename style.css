@@ -49,12 +49,18 @@ input::placeholder {
   color: #000;
 }
 
+h5 {
+  position: relative;
+  bottom: 15px;
+  margin-bottom: -2px;
+}
+
 .highlight {
   background: #FA787E;
   color: pink;
-  font-size: 1.2em;
+  font-size: 1.4em;
   padding: 10px;
-  
+
 }
 
 .poll-form input.ng-invalid.ng-touched {
