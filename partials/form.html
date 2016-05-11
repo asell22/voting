@@ -10,9 +10,9 @@
           <input type="input" ng-model="form.option" placeholder="Enter Name Of Option">
           <button type="button" ng-click="form.addOption()" class="btn btn-info">Add Option</button>
           <hr>
-          <h3><u>Options</u></h3>
+          <h3 ng-hide="!form.options.length"><u>Options</u></h3>
           <ol class="options-list" ng-repeat="option in form.options">
-            <li ng-bind="option"></li>
+            <span class="options-num" ng-bind="option.count"></span><li ng-bind="option.name"></li>
           </ol>
         </div>
       </div>

@@ -41,12 +41,22 @@ angular.module('voting', ['ui.router'])
   self.polls = polls;
   self.count = self.polls.length;
   self.options = [];
-
+  self.optionCount = 1;
 
   // functions
+  // var increment = function() {
+  //   option.count += 1;
+  // }
+
   self.addOption = function() {
-    self.options.push(self.option);
+    self.optionObj = {
+      name: self.option,
+      count: self.optionCount
+    }
+    // increment(self.option)
+    self.options.push(self.optionObj);
     self.option = '';
+    self.optionCount++;
   }
   self.addPoll = function() {
 
