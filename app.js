@@ -37,13 +37,16 @@ angular.module('voting', ['ui.router'])
 })
 .controller('votingFormCtrl', function($scope, polls, $state) {
   var self = this;
-  self.polls = polls
 
+  self.polls = polls;
   self.count = self.polls.length;
+  self.options = [];
+
 
   // functions
   self.addOption = function() {
-    console.log("Option added");
+    self.options.push(self.option);
+    self.option = '';
   }
   self.addPoll = function() {
 
