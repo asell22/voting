@@ -2,4 +2,7 @@
 <div class="">
   <h1 ng-bind="poll.title"></h1><span>By {{poll.user}}</span>
 </div>
-<h3 ng-repeat="option in poll.options">{{option.name}}: {{option.totalVotes}}</h3>
+<div ng-repeat="option in poll.options">
+  <h3>{{option.name}}: {{option.totalVotes}}</h3>
+  <button type="button" class="btn btn-info" ng-click="increment(option)">+</button>
+</div>

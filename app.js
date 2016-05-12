@@ -27,7 +27,7 @@ angular.module('voting', ['ui.router'])
 .factory('polls', function() {
   var pollsObject = {
     polls : [
-      { title: 'poll1', user: 'user1' },
+      { title: 'poll1', user: 'user1', options: [{count: 1, name: "option 1", totalVotes: 0},{count: 2, name: "option 2", totalVotes: 0}] },
       { title: 'poll2', user: 'user2' },
       { title: 'poll3', user: 'user3' }
     ]
@@ -80,6 +80,9 @@ angular.module('voting', ['ui.router'])
   }
 })
 .controller('pollCtrl', function($scope, polls, $stateParams) {
-  $scope.poll = polls.polls[$stateParams.id]
+  $scope.poll = polls.polls[$stateParams.id];
+  $scope.increment = function(option) {
+    option.totalVotes++;
+  }
   console.log($scope.poll);
 })
