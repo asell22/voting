@@ -122,15 +122,15 @@ angular.module('voting', ['ui.router', 'highcharts-ng'])
   $scope.poll = polls.polls[$stateParams.id];
   var title = $scope.poll.title;
   var data = $scope.poll.options;
-  console.log(title);
-  console.log(data);
+  // console.log(title);
+  // console.log(data);
   $scope.pieData = [];
   angular.forEach(data, function(val) {
     $scope.pieData.push([
       val.name, val.totalVotes
     ])
   })
-  console.log($scope.options);
+
 
   $scope.chartConfig = {
     options: {
@@ -154,8 +154,16 @@ angular.module('voting', ['ui.router', 'highcharts-ng'])
           format: '<b>{point.name}</b>: {point.percentage:.1f} %'
         }
       }
-    }
+    },
+    loading: false
+  }
 
+  console.log($scope.chartConfig.series[0].data);
+  $scope.increment = function(option) {
+    var data = $scope.chartConfig.series[0].data;
+    var index = this.$index;
+    data[index][1]++;
+    option.totalVotes++;
   }
   // $scope.$on('addData', function() {
   //   angular.forEach($scope.poll.options, function(val) {
