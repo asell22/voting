@@ -1,4 +1,4 @@
-angular.module('voting', ['ui.router'])
+angular.module('voting', ['ui.router', 'highcharts-ng'])
 .config([
   '$stateProvider',
   '$urlRouterProvider',
@@ -27,7 +27,7 @@ angular.module('voting', ['ui.router'])
 .factory('polls', function() {
   var pollsObject = {
     polls : [
-      { title: 'poll1', user: 'user1', options: [{count: 1, name: "option 1", totalVotes: 4},{count: 2, name: "option 2", totalVotes: 3}] },
+      { title: 'poll1', user: 'user1', options: [{count: 1, name: "option 1", totalVotes: 4},{count: 2, name: "option 2", totalVotes: 3}, {count: 3, name: "option 3", totalVotes: 12}] },
       { title: 'poll2', user: 'user2', options: [{count: 1, name: "option 1", totalVotes: 13},{count: 2, name: "option 2", totalVotes: 2}] },
       { title: 'poll3', user: 'user3', options: [{count: 1, name: "option 1", totalVotes: 2},{count: 2, name: "option 2", totalVotes: 15}]}
     ]
@@ -38,10 +38,16 @@ angular.module('voting', ['ui.router'])
 .directive('hcPieChart', function() {
   return {
     restrict: 'E',
+    replace: true,
     template: '<div></div>',
     scope: {
       title: '@',
       data: '='
+    },
+    controller: function($scope, polls, $stateParams) {
+      $scope.increment = function(option) {
+        option.totalVotes++;
+      }
     },
     link: function(scope, element) {
       Highcharts.chart(element[0], {
@@ -82,10 +88,10 @@ angular.module('voting', ['ui.router'])
   self.optionCount = 1;
 
   self.addOption = function() {
-    self.optionObj = {
+    self.optionArr = {
       name: self.option,
       count: self.optionCount,
-      totalVotes: 0
+      totalVotes: Math.floor(Math.random() * 30) + 1
     }
     self.options.push(self.optionObj);
     self.option = '';
@@ -114,14 +120,63 @@ angular.module('voting', ['ui.router'])
 })
 .controller('pollCtrl', function($scope, polls, $stateParams) {
   $scope.poll = polls.polls[$stateParams.id];
-  $scope.increment = function(option) {
-    option.totalVotes++;
-  }
+  var title = $scope.poll.title;
+  var data = $scope.poll.options;
+  console.log(title);
+  console.log(data);
   $scope.pieData = [];
-  // console.log($scope.poll);
-  angular.forEach($scope.poll.options, function(val) {
-    $scope.pieData.push(
-      {name: val.name, y: val.totalVotes}
-    )
+  angular.forEach(data, function(val) {
+    $scope.pieData.push([
+      val.name, val.totalVotes
+    ])
   })
+  console.log($scope.options);
+
+  $scope.chartConfig = {
+    options: {
+      chart: {
+        type: 'pie'
+      }
+    },
+    series: [{
+      type: 'pie',
+      data: $scope.pieData
+    }],
+    title: {
+      text: title
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+      }
+    }
+
+  }
+  // $scope.$on('addData', function() {
+  //   angular.forEach($scope.poll.options, function(val) {
+  //     $scope.pieData.push({
+  //       name: val.name,
+  //       y: val.totalVotes
+  //     })
+  //   })
+  // })
+  // var pieData = function() {
+  //   angular.forEach($scope.poll.options, function(val) {
+  //     $scope.pieData.push(
+  //       {name: val.name, y: val.totalVotes}
+  //     )
+  //   })
+  // }
+
+
+
+  // $scope.pieData = [];
+  //
+  // var options = $scope.poll.options;
+  // $scope.$emit('addData');
 })
